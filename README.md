@@ -27,6 +27,7 @@ This project is using [oatpp](https://github.com/oatpp/oatpp) and [oatpp-swagger
 |
 |- test/                                 // test folder
 |- utility/install-oatpp-modules.sh      // utility script to install required oatpp-modules.
+|- utility/user_example.js               // JS script to create a sample database - 'oatpp_example' and collection - 'user_example'
 ```
 
 ---
@@ -38,7 +39,8 @@ This project is using [oatpp](https://github.com/oatpp/oatpp) and [oatpp-swagger
 **Requires**
 
 - `oatpp` and `oatpp-swagger` and `bsoncxx` and `mongocxx` modules installed. You may run `utility/install-oatpp-modules.sh` 
-script to install required oatpp modules.
+script to install required oatpp modules. Need to run `node utility/user_example.js` and ensure `nodejs` is installed as well as
+a local copy of mongodb is installed via `npm install mongodb`
 
 ```
 $ mkdir build && cd build

@@ -30,8 +30,6 @@ using bsoncxx::builder::stream::finalize;
 
 const std::string TAG = "Mongodb example ";
 const std::string DB_HOST = "localhost:27017";
-const std::string DB_USER = "userAdmin";
-const std::string DB_PASSWORD = "oatpp-example_1";
 const std::string DB_NAME = "oatpp_example";
 const std::string COLLECTION_NAME = "user_example";
 
@@ -49,7 +47,7 @@ private:
 public:  
   Database() {
       std::string connString;
-      connString =  "mongodb://" + DB_USER + ":" + DB_PASSWORD + "@" + DB_HOST;
+      connString =  "mongodb://" + DB_HOST;
       m_client = mongocxx::client{mongocxx::uri{connString}};
       m_db = m_client[DB_NAME];
       m_collection = m_db[COLLECTION_NAME];
