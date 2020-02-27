@@ -10,7 +10,7 @@
 class MyControllerTest : public oatpp::test::UnitTest {
 public:
 
-  MyControllerTest() : UnitTest("TEST[StyleControllerTest]"){}
+  MyControllerTest() : UnitTest("TEST[UserControllerTest]"){}
   void onRun() override;
 
 };

@@ -16,10 +16,19 @@ v_int32 Database::getMaxId(){
   opts.sort(sort_doc.view()).limit(1);
 
   auto cursor = m_collection.find({}, opts);
-  return std::distance(cursor.begin(), cursor.end());
+
+  int maxId = 0;
+  for(auto doc : cursor) {        
+      auto userDto = m_mongomapper->readFromDocument<UserDto::ObjectWrapper>(doc);
+      maxId= userDto->id + 1;
+  }
+
+  return maxId;
 }
 
 UserDto::ObjectWrapper Database::createUser(const UserDto::ObjectWrapper& userDto){
+  auto newId = getMaxId();
+  userDto->id = newId;
   auto mongoStyle = m_mongomapper->writeAsDocument(userDto);
   auto result = m_collection.insert_one(mongoStyle.view());
 

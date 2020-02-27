@@ -19,9 +19,20 @@ class MyApiTestClient : public oatpp::web::client::ApiClient {
 
   API_CLIENT_INIT(MyApiTestClient)
 
-  API_CALL("GET", "/", getRoot)
+  // API for createUser
+  API_CALL("POST", "demo/api/users", createUser)
 
-  // TODO - add more client API calls here
+  // API for updateUser
+  API_CALL("PUT", "demo/api/users/{userId}", updateUser)
+
+  // API for getUserById
+  API_CALL("GET", "demo/api/users/{userId}", getUserById)
+
+  // API for getUsers
+  API_CALL("GET", "demo/api/users", getUsers)
+
+  // API for deleteUser
+  API_CALL("DELETE", "demo/api/users/{userId}", deleteUser)
 
 };
 

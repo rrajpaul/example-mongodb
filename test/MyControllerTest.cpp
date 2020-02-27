@@ -33,15 +33,24 @@ void MyControllerTest::onRun() {
     /* Get object mapper component */
     OATPP_COMPONENT(std::shared_ptr<oatpp::data::mapping::ObjectMapper>, objectMapper);
 
+
     /* Create http request executor for Api Client */
     auto requestExecutor = oatpp::web::client::HttpRequestExecutor::createShared(clientConnectionProvider);
 
     /* Create Test API client */
     auto client = MyApiTestClient::createShared(requestExecutor, objectMapper);
 
+
+
     /* Call server API */
     /* Call root endpoint of MyController */
-    auto response = client->getRoot();
+
+
+    //auto userTestObject = UserDto::ObjectWrapper();
+
+
+
+    auto response = client->createUser();
 
     /* Assert that server responds with 200 */
     OATPP_ASSERT(response->getStatusCode() == 200);
@@ -50,7 +59,6 @@ void MyControllerTest::onRun() {
     auto user = response->readBodyToDto<UserDto>(objectMapper.get());
 
     /* Assert that received message is as expected */
-    OATPP_ASSERT(user);
     OATPP_ASSERT(user->id->getValue() == 1);
 
   }, std::chrono::minutes(10) /* test timeout */);
