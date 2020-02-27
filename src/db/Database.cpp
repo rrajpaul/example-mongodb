@@ -11,17 +11,12 @@
 v_int32 Database::getMaxId(){
   bsoncxx::builder::stream::document sort_doc{};
   sort_doc << "id" << -1 ;
-
   mongocxx::options::find opts;
   opts.sort(sort_doc.view()).limit(1);
 
   auto cursor = m_collection.find({}, opts);
-
-  int maxId = 0;
-  for(auto doc : cursor) {        
-      auto userDto = m_mongomapper->readFromDocument<UserDto::ObjectWrapper>(doc);
-      maxId= userDto->id + 1;
-  }
+  auto userDto = m_mongomapper->readFromDocument<UserDto::ObjectWrapper>(*cursor.begin());
+  auto maxId = userDto->id + 1;
 
   return maxId;
 }
